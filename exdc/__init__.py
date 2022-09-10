@@ -14,6 +14,4 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from ._client import DiscordClient  # noqa: F401
-from ._model import DiscordModel, Snowflake  # noqa: F401
-from ._type import DiscordType  # noqa: F401
+from ._client import DiscordBotAuthorization, DiscordClient  # noqa: F401
