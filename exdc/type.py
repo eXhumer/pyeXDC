@@ -226,18 +226,23 @@ class MessageReference(TypedDict):
 
 
 class Snowflake:
-    def __init__(self, value: int | str) -> None:
+    def __init__(self, value: int | str):
         assert int(value) <= (1 << 64) - 1, "Value too big!"
         self.__value = int(value)
 
+    def __repr__(self):
+        __data = ", ".join((
+            f"value={self.__value}",
+            f"timestamp={self.timestamp}",
+            f"internal_process_id={self.internal_process_id}",
+            f"internal_worker_id={self.internal_worker_id}",
+            f"increment={self.increment}",
+        ))
+
+        return f"{type(self).__name__}({__data})"
+
     def __str__(self):
         return str(self.__value)
-
-    def __repr__(self) -> str:
-        return f"Snowflake(value={self.__value}, timestamp={self.timestamp}" +\
-            f", internal_process_id={self.internal_process_id}, " +\
-            f"internal_worker_id={self.internal_worker_id}, " +\
-            f"increment={self.increment})"
 
     @property
     def __discord_epoch_timestamp_ms(self):
@@ -248,20 +253,20 @@ class Snowflake:
         return self.__discord_epoch_timestamp_ms + 0x14AA2CAB000
 
     @property
-    def timestamp(self):
-        return datetime.fromtimestamp(self.__epoch_timestamp_ms / 1000)
-
-    @property
-    def internal_worker_id(self):
-        return (self.__value & 0x3E0000) >> 17
+    def increment(self):
+        return self.__value & 0xFFF
 
     @property
     def internal_process_id(self):
         return (self.__value & 0x1F000) >> 12
 
     @property
-    def increment(self):
-        return self.__value & 0xFFF
+    def internal_worker_id(self):
+        return (self.__value & 0x3E0000) >> 17
+
+    @property
+    def timestamp(self):
+        return datetime.fromtimestamp(self.__epoch_timestamp_ms / 1000)
 
 
 class User(TypedDict):
