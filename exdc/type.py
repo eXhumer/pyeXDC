@@ -17,7 +17,7 @@
 from __future__ import annotations
 from datetime import datetime
 from enum import IntEnum, IntFlag, StrEnum
-from typing import BinaryIO, List, Literal, NotRequired, Tuple, TypedDict
+from typing import IO, List, Literal, NotRequired, Tuple, TypedDict
 
 
 class AllowedMention(TypedDict):
@@ -31,6 +31,19 @@ class AllowedMentionType(StrEnum):
     ROLES = "roles"
     USERS = "users"
     EVERYONE = "everyone"
+
+
+class Attachment(TypedDict):
+    id: str
+    filename: NotRequired[str]
+    description: NotRequired[str]
+    content_type: NotRequired[str]
+    size: NotRequired[int]
+    url: NotRequired[str]
+    proxy_url: NotRequired[str]
+    height: NotRequired[int | None]
+    width: NotRequired[int | None]
+    ephemeral: NotRequired[bool]
 
 
 class ComponentType(IntEnum):
@@ -106,9 +119,9 @@ class Embed(TypedDict):
     timestamp: NotRequired[str]
     color: NotRequired[int]
     footer: NotRequired[EmbedFooter]
-    image: NotRequired[EmbedImage | Tuple[str, BinaryIO]]
-    thumbnail: NotRequired[EmbedThumbnail | Tuple[str, BinaryIO]]
-    video: NotRequired[EmbedVideo | Tuple[str, BinaryIO]]
+    image: NotRequired[EmbedImage | Tuple[IO[bytes], str]]
+    thumbnail: NotRequired[EmbedThumbnail | Tuple[IO[bytes], str]]
+    video: NotRequired[EmbedVideo | Tuple[IO[bytes], str]]
     provider: NotRequired[EmbedProvider]
     author: NotRequired[EmbedAuthor]
     fields: NotRequired[List[EmbedField]]
@@ -117,7 +130,7 @@ class Embed(TypedDict):
 class EmbedAuthor(TypedDict):
     name: str
     url: NotRequired[str]
-    icon_url: NotRequired[str | Tuple[str, BinaryIO]]
+    icon_url: NotRequired[str | Tuple[IO[bytes], str]]
     proxy_icon_url: NotRequired[str]
 
 
@@ -129,7 +142,7 @@ class EmbedField(TypedDict):
 
 class EmbedFooter(TypedDict):
     text: str
-    icon_url: NotRequired[str | Tuple[str, BinaryIO]]
+    icon_url: NotRequired[str | Tuple[IO[bytes], str]]
     proxy_icon_url: NotRequired[str]
 
 
@@ -189,6 +202,20 @@ class MessageFlag(IntFlag):
     EPHEMERAL = 1 << 6
     LOADING = 1 << 7
     FAILED_TO_MENTION_SOME_ROLES_IN_THREAD = 1 << 8
+
+
+class MessagePayload(TypedDict):
+    content: NotRequired[str]
+    nonce: NotRequired[int | str]
+    tts: NotRequired[bool]
+    embeds: NotRequired[List[Embed]]
+    allowed_mentions: NotRequired[AllowedMention]
+    message_reference: NotRequired[MessageReference]
+    components: NotRequired[List[ComponentActionRow]]
+    sticker_ids: NotRequired[List[str]]
+    payload_json: NotRequired[str]
+    attachments: NotRequired[List[Attachment]]
+    flags: NotRequired[MessageFlag]
 
 
 class MessageReference(TypedDict):
