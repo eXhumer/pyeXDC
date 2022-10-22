@@ -249,7 +249,7 @@ class DiscordClient:
                         attachment_id, filename = new_attachment(*embed["video"])
                         embeds[i]["video"] = EmbedVideo(url=f"attachment://{filename}")
 
-                if "author" in embed:
+                if "author" in embed and embed["author"]:
                     if not isinstance(embed["author"]["icon_url"], str):
                         attachment_id, filename = new_attachment(*embed["author"]["icon_url"])
                         embeds[i]["author"]["icon_url"] = f"attachment://{filename}"
@@ -370,12 +370,24 @@ class DiscordClient:
                         attachment_id, filename = new_attachment(*embed["video"])
                         embeds[i]["video"] = EmbedVideo(url=f"attachment://{filename}")
 
-                if "author" in embed:
+                if "author" in embed and embed["author"]:
                     if not isinstance(embed["author"]["icon_url"], str):
                         attachment_id, filename = new_attachment(*embed["author"]["icon_url"])
                         embeds[i]["author"]["icon_url"] = f"attachment://{filename}"
 
             payload_json.update(embeds=embeds)
+
+        if wait or thread_id:
+            params = {}
+
+            if wait:
+                params |= {"wait": wait}
+
+            if thread_id:
+                params |= {"thread_id": thread_id}
+
+        else:
+            params = None
 
         if len(files) > 0:
             files_with_id: List[Tuple[IO[bytes], str, str]] = []
@@ -407,15 +419,6 @@ class DiscordClient:
                 }
 
             mp_encoder = MultipartEncoder(fields=mp_fields)
-
-            if wait or thread_id:
-                params = {}
-
-                if wait:
-                    params |= {"wait": wait}
-
-                if thread_id:
-                    params |= {"thread_id": thread_id}
 
             r = session.post("/".join((DiscordClient.__rest_api_url,
                                        f"v{DiscordClient.__rest_api_version}", "webhooks",
