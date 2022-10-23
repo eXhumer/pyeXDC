@@ -1,5 +1,6 @@
 # eXDC
 [![eXDC Release](https://github.com/eXhumer/pyeXDC/actions/workflows/release.yml/badge.svg?branch=dev)](https://github.com/eXhumer/pyeXDC/actions/workflows/release.yml)
+
 Barebones Python based Discord client. Created for use with [eXF1LT](https://github.com/eXhumer/pyeXF1LT).
 
 ## Package Installation Guide
