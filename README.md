@@ -3,12 +3,12 @@ Barebones Python based Discord client. Created for use with [eXF1LT](https://git
 
 ## Package Installation Guide
 ### Requires
-* Python 3.9+
+* Python 3.11+
 * pip package manager
 
 ### Install from source
 ```console
-pip install .
+pip install -e git+https://github.com/eXhumer/pyeXDC.git@dev#egg=exdc
 ```
 
 ### Install from PyPI
@@ -17,4 +17,4 @@ pip install exdc
 ```
 
 ## Licensing
-This project is licensed under OSI Approved [GNU AGPLv3 **ONLY**](./COPYING).
+This project is licensed under OSI Approved [GNU AGPLv3 **ONLY**](./COPYING.md).
