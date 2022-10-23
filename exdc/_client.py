@@ -230,29 +230,49 @@ class DiscordClient:
 
             for i, embed in enumerate(embeds):
                 if "footer" in embed:
-                    if not isinstance(embed["footer"]["icon_url"], str):
-                        attachment_id, filename = new_attachment(*embed["footer"]["icon_url"])
-                        embeds[i]["footer"]["icon_url"] = f"attachment://{filename}"
+                    if embed["footer"]:
+                        if not isinstance(embed["footer"]["icon_url"], str):
+                            attachment_id, filename = new_attachment(*embed["footer"]["icon_url"])
+                            embeds[i]["footer"]["icon_url"] = f"attachment://{filename}"
+
+                    else:
+                        embeds[i].pop("footer")
 
                 if "image" in embed:
-                    if not isinstance(embed["image"], dict):
-                        attachment_id, filename = new_attachment(*embed["image"])
-                        embeds[i]["image"] = EmbedImage(url=f"attachment://{filename}")
+                    if embed["image"]:
+                        if not isinstance(embed["image"], dict):
+                            attachment_id, filename = new_attachment(*embed["image"])
+                            embeds[i]["image"] = EmbedImage(url=f"attachment://{filename}")
+
+                    else:
+                        embeds[i].pop("image")
 
                 if "thumbnail" in embed:
-                    if not isinstance(embed["thumbnail"], dict):
-                        attachment_id, filename = new_attachment(*embed["thumbnail"])
-                        embeds[i]["thumbnail"] = EmbedThumbnail(url=f"attachment://{filename}")
+                    if embed["thumbnail"]:
+                        if not isinstance(embed["thumbnail"], dict):
+                            attachment_id, filename = new_attachment(*embed["thumbnail"])
+                            embeds[i]["thumbnail"] = EmbedThumbnail(url=f"attachment://{filename}")
+
+                    else:
+                        embeds[i].pop("image")
 
                 if "video" in embed:
-                    if not isinstance(embed["video"], dict):
-                        attachment_id, filename = new_attachment(*embed["video"])
-                        embeds[i]["video"] = EmbedVideo(url=f"attachment://{filename}")
+                    if embed["video"]:
+                        if not isinstance(embed["video"], dict):
+                            attachment_id, filename = new_attachment(*embed["video"])
+                            embeds[i]["video"] = EmbedVideo(url=f"attachment://{filename}")
 
-                if "author" in embed and embed["author"]:
-                    if not isinstance(embed["author"]["icon_url"], str):
-                        attachment_id, filename = new_attachment(*embed["author"]["icon_url"])
-                        embeds[i]["author"]["icon_url"] = f"attachment://{filename}"
+                    else:
+                        embeds[i].pop("video")
+
+                if "author" in embed:
+                    if embed["author"]:
+                        if not isinstance(embed["author"]["icon_url"], str):
+                            attachment_id, filename = new_attachment(*embed["author"]["icon_url"])
+                            embeds[i]["author"]["icon_url"] = f"attachment://{filename}"
+
+                    else:
+                        embeds[i].pop("video")
 
             payload_json.update(embeds=embeds)
 
@@ -351,39 +371,59 @@ class DiscordClient:
 
             for i, embed in enumerate(embeds):
                 if "footer" in embed:
-                    if not isinstance(embed["footer"]["icon_url"], str):
-                        attachment_id, filename = new_attachment(*embed["footer"]["icon_url"])
-                        embeds[i]["footer"]["icon_url"] = f"attachment://{filename}"
+                    if embed["footer"]:
+                        if not isinstance(embed["footer"]["icon_url"], str):
+                            attachment_id, filename = new_attachment(*embed["footer"]["icon_url"])
+                            embeds[i]["footer"]["icon_url"] = f"attachment://{filename}"
+
+                    else:
+                        embeds[i].pop("footer")
 
                 if "image" in embed:
-                    if not isinstance(embed["image"], dict):
-                        attachment_id, filename = new_attachment(*embed["image"])
-                        embeds[i]["image"] = EmbedImage(url=f"attachment://{filename}")
+                    if embed["image"]:
+                        if not isinstance(embed["image"], dict):
+                            attachment_id, filename = new_attachment(*embed["image"])
+                            embeds[i]["image"] = EmbedImage(url=f"attachment://{filename}")
+
+                    else:
+                        embeds[i].pop("image")
 
                 if "thumbnail" in embed:
-                    if not isinstance(embed["thumbnail"], dict):
-                        attachment_id, filename = new_attachment(*embed["thumbnail"])
-                        embeds[i]["thumbnail"] = EmbedThumbnail(url=f"attachment://{filename}")
+                    if embed["thumbnail"]:
+                        if not isinstance(embed["thumbnail"], dict):
+                            attachment_id, filename = new_attachment(*embed["thumbnail"])
+                            embeds[i]["thumbnail"] = EmbedThumbnail(url=f"attachment://{filename}")
+
+                    else:
+                        embeds[i].pop("image")
 
                 if "video" in embed:
-                    if not isinstance(embed["video"], dict):
-                        attachment_id, filename = new_attachment(*embed["video"])
-                        embeds[i]["video"] = EmbedVideo(url=f"attachment://{filename}")
+                    if embed["video"]:
+                        if not isinstance(embed["video"], dict):
+                            attachment_id, filename = new_attachment(*embed["video"])
+                            embeds[i]["video"] = EmbedVideo(url=f"attachment://{filename}")
 
-                if "author" in embed and embed["author"]:
-                    if not isinstance(embed["author"]["icon_url"], str):
-                        attachment_id, filename = new_attachment(*embed["author"]["icon_url"])
-                        embeds[i]["author"]["icon_url"] = f"attachment://{filename}"
+                    else:
+                        embeds[i].pop("video")
+
+                if "author" in embed:
+                    if embed["author"]:
+                        if not isinstance(embed["author"]["icon_url"], str):
+                            attachment_id, filename = new_attachment(*embed["author"]["icon_url"])
+                            embeds[i]["author"]["icon_url"] = f"attachment://{filename}"
+
+                    else:
+                        embeds[i].pop("video")
 
             payload_json.update(embeds=embeds)
 
-        if wait or thread_id:
+        if wait is not None or thread_id is not None:
             params = {}
 
-            if wait:
+            if wait is not None:
                 params |= {"wait": wait}
 
-            if thread_id:
+            if thread_id is not None:
                 params |= {"thread_id": thread_id}
 
         else:
