@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 
 class Ban(TypedDict):
     reason: str | None
-    user: "User"
+    user: User
 
 
 class DefaultMessageNotificationLevel(IntEnum):
@@ -45,8 +45,8 @@ class Guild(TypedDict):
     verification_level: VerificationLevel
     default_message_notifications: DefaultMessageNotificationLevel
     explicit_content_filter: ExplicitContentFilterLevel
-    roles: list["Role"]
-    emojis: list["Emoji"]
+    roles: list[Role]
+    emojis: list[Emoji]
     features: list[GuildFeature | GuildMutableFeatue]
     mfa_level: MFALevel
     application_id: str | None
@@ -67,7 +67,7 @@ class Guild(TypedDict):
     approximate_presence_count: NotRequired[int]
     welcome_screen: NotRequired[WelcomeScreen]
     nsfw_level: GuildNSFWLevel
-    stickers: NotRequired[list["Sticker"]]
+    stickers: NotRequired[list[Sticker]]
     premium_progress_bar_enabled: bool
 
 
@@ -108,7 +108,7 @@ class GuildMemberFlag(IntFlag):
 
 
 class GuildMember(TypedDict):
-    user: NotRequired["User"]
+    user: NotRequired[User]
     nick: NotRequired[str | None]
     avatar: NotRequired[str | None]
     roles: list[str]
@@ -141,12 +141,12 @@ class GuildPreview(TypedDict):
     icon: str | None
     splash: str | None
     discovery_splash: str | None
-    emojis: list["Emoji"]
+    emojis: list[Emoji]
     features: list[GuildFeature | GuildMutableFeatue]
     approximate_member_count: int
     approximate_presence_count: int
     description: str | None
-    stickers: list["Sticker"]
+    stickers: list[Sticker]
 
 
 class GuildWidget(TypedDict):
@@ -154,7 +154,7 @@ class GuildWidget(TypedDict):
     name: str
     instant_invite: str | None
     instant_invite: str | None
-    members: list["User"]
+    members: list[User]
     presence_count: int
 
 
@@ -173,13 +173,13 @@ class Integration(TypedDict):
     enable_emoticons: NotRequired[bool]
     expire_behavior: NotRequired[IntegrationExpireBehavior]
     expire_grace_period: NotRequired[int]
-    user: NotRequired["User"]
+    user: NotRequired[User]
     account: IntegrationAccount
     synced_at: NotRequired[str]
     subscriber_count: NotRequired[int]
     revoked: NotRequired[bool]
-    application: NotRequired["Application"]
-    scopes: NotRequired["OAuth2Scope"]
+    application: NotRequired[Application]
+    scopes: NotRequired[OAuth2Scope]
 
 
 class IntegrationAccount(TypedDict):

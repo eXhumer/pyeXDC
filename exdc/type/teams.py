@@ -23,4 +23,4 @@ class TeamMember(TypedDict):
     membership_state: int
     permissions: list[str]
     team_id: str
-    user: "User"
+    user: User

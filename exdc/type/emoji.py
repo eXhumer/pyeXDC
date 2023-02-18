@@ -9,8 +9,8 @@ if TYPE_CHECKING:
 class Emoji(TypedDict):
     id: str | None
     name: str | None
-    roles: NotRequired[list["Role"]]
-    user: NotRequired["User"]
+    roles: NotRequired[list[Role]]
+    user: NotRequired[User]
     require_colons: NotRequired[bool]
     managed: NotRequired[bool]
     animated: NotRequired[bool]

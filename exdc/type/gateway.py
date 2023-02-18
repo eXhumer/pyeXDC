@@ -105,8 +105,8 @@ class Intent(IntFlag):
 
 class MessageCreate(Message):
     guild_id: NotRequired[str]
-    member: NotRequired["GuildMember"]
-    mentions: list["User"]
+    member: NotRequired[GuildMember]
+    mentions: list[User]
 
 
 class MessageDelete(TypedDict):
@@ -206,12 +206,12 @@ class PresenceUpdatePayload(ReceiveEventPayload):
 
 class ReadyEventData(TypedDict):
     v: int
-    user: "User"
-    guilds: list["UnavailableGuild"]
+    user: User
+    guilds: list[UnavailableGuild]
     session_id: str
     resume_gateway_url: str
     shard: NotRequired[list[int]]
-    application: "Application"
+    application: Application
 
 
 class ReceiveEvent(StrEnum):

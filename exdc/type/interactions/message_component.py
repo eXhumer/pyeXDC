@@ -27,7 +27,7 @@ class ButtonComponent(TypedDict):
     type: Literal[ComponentType.BUTTON]
     style: ButtonStyle
     label: NotRequired[str]
-    emoji: NotRequired["Emoji"]
+    emoji: NotRequired[Emoji]
     custom_id: NotRequired[str]
     url: NotRequired[str]
     disabled: NotRequired[bool]
@@ -45,7 +45,7 @@ class SelectMenuComponent(TypedDict):
     type: ComponentType
     custom_id: str
     options: NotRequired[list[SelectOption]]
-    channel_types: NotRequired[list["ChannelType"]]
+    channel_types: NotRequired[list[ChannelType]]
     placeholder: NotRequired[str]
     min_values: NotRequired[int]
     max_values: NotRequired[int]
@@ -56,7 +56,7 @@ class SelectOption(TypedDict):
     label: str
     value: str
     description: NotRequired[str]
-    emoji: NotRequired["Emoji"]
+    emoji: NotRequired[Emoji]
     default: NotRequired[bool]
 
 

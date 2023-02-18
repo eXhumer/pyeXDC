@@ -17,7 +17,7 @@ class Sticker(TypedDict):
     format_type: StickerFormatType
     available: NotRequired[bool]
     guild_id: NotRequired[str]
-    user: NotRequired["User"]
+    user: NotRequired[User]
     sort_value: NotRequired[int]
 
 

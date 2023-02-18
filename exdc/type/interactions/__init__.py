@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 class ApplicationCommandData(TypedDict):
     id: str
     name: str
-    type: "ApplicationCommandType"
+    type: ApplicationCommandType
     resolved: NotRequired[ResolvedData]
     options: NotRequired[list[ApplicationCommandInteractionDataOption]]
     guild_id: NotRequired[str]
@@ -24,7 +24,7 @@ class ApplicationCommandData(TypedDict):
 
 class ApplicationCommandInteractionDataOption(TypedDict):
     name: str
-    type: "ApplicationCommandOptionType"
+    type: ApplicationCommandOptionType
     value: NotRequired[str | int | float | bool]
     options: NotRequired[list[ApplicationCommandInteractionDataOption]]
     focused: NotRequired[bool]
@@ -37,34 +37,34 @@ class Interaction(TypedDict):
     data: NotRequired[ApplicationCommandData]
     guild_id: NotRequired[str]
     channel_id: NotRequired[str]
-    member: NotRequired["GuildMember"]
-    user: NotRequired["User"]
+    member: NotRequired[GuildMember]
+    user: NotRequired[User]
     token: str
     version: int
-    message: NotRequired["Message"]
+    message: NotRequired[Message]
     app_permissions: NotRequired[str]
     locale: NotRequired[str]
     guild_locale: NotRequired[str]
 
 
 class InteractionResponseAutocomplete(TypedDict):
-    choices: list["ApplicationCommandOptionChoice"]
+    choices: list[ApplicationCommandOptionChoice]
 
 
 class InteractionResponseMessage(TypedDict):
     tts: NotRequired[bool]
     content: NotRequired[str]
-    embeds: NotRequired[list["Embed"]]
-    allowed_mentions: NotRequired["AllowedMentions"]
-    flags: NotRequired["MessageFlag"]
-    components: NotRequired[list["ActionRowComponent"]]
-    attachments: NotRequired[list["Attachment"]]
+    embeds: NotRequired[list[Embed]]
+    allowed_mentions: NotRequired[AllowedMentions]
+    flags: NotRequired[MessageFlag]
+    components: NotRequired[list[ActionRowComponent]]
+    attachments: NotRequired[list[Attachment]]
 
 
 class InteractionResponseModal(TypedDict):
     custom_id: str
     title: str
-    components: list["ActionRowComponent"]
+    components: list[ActionRowComponent]
 
 
 class InteractionResponse(TypedDict):
@@ -95,14 +95,14 @@ class MessageInteraction(TypedDict):
     id: str
     type: InteractionType
     name: str
-    user: "User"
-    member: NotRequired["GuildMember"]
+    user: User
+    member: NotRequired[GuildMember]
 
 
 class ResolvedData(TypedDict):
-    users: NotRequired[dict[str, "User"]]
-    members: NotRequired[dict[str, "GuildMember"]]
-    roles: NotRequired[dict[str, "Role"]]
-    channels: NotRequired[dict[str, "Channel"]]
-    messages: NotRequired[dict[str, "Message"]]
-    attachments: NotRequired[dict[str, "Attachment"]]
+    users: NotRequired[dict[str, User]]
+    members: NotRequired[dict[str, GuildMember]]
+    roles: NotRequired[dict[str, Role]]
+    channels: NotRequired[dict[str, Channel]]
+    messages: NotRequired[dict[str, Message]]
+    attachments: NotRequired[dict[str, Attachment]]

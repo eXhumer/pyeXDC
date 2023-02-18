@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 class ApplicationRoleConnection(TypedDict):
     platform_name: str | None
     platform_username: str | None
-    metadata: "ApplicationRoleConnectionMetadata"
+    metadata: ApplicationRoleConnectionMetadata
 
 
 class Connection(TypedDict):

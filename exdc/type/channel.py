@@ -51,7 +51,7 @@ class Channel(TypedDict):
     bitrate: NotRequired[int]
     user_limit: NotRequired[int]
     rate_limit_per_user: NotRequired[int]
-    recipients: NotRequired[list["User"]]
+    recipients: NotRequired[list[User]]
     icon: NotRequired[str | None]
     owner_id: NotRequired[str]
     application_id: NotRequired[str]
@@ -217,16 +217,16 @@ class Message(TypedDict):
     webhook_id: NotRequired[str]
     type: MessageType
     activity: NotRequired[MessageActivity]
-    application: NotRequired["Application"]
+    application: NotRequired[Application]
     application_id: NotRequired[str]
     message_reference: NotRequired[MessageReference]
     flags: NotRequired[MessageFlag]
     referenced_message: NotRequired[Message | None]
-    interaction: NotRequired["MessageInteraction"]
+    interaction: NotRequired[MessageInteraction]
     thread: NotRequired[Channel]
-    components: NotRequired[list["ActionRowComponent"]]
-    sticker_items: NotRequired[list["StickerItem"]]
-    stickers: NotRequired[list["Sticker"]]
+    components: NotRequired[list[ActionRowComponent]]
+    sticker_items: NotRequired[list[StickerItem]]
+    stickers: NotRequired[list[Sticker]]
     position: NotRequired[int]
     role_subscription_data: NotRequired[RoleSubscriptionData]
 
@@ -312,7 +312,7 @@ class OverwriteType(IntEnum):
 class Reaction(TypedDict):
     count: int
     me: bool
-    emoji: "Emoji"
+    emoji: Emoji
 
 
 class RoleSubscriptionData(TypedDict):
@@ -332,7 +332,7 @@ class ThreadMember(TypedDict):
     user_id: NotRequired[str]
     join_timestamp: str
     flags: int
-    member: NotRequired["GuildMember"]
+    member: NotRequired[GuildMember]
 
 
 class ThreadMetadata(TypedDict):

@@ -13,13 +13,13 @@ class Webhook(TypedDict):
     type: WebhookType
     guild_id: NotRequired[str | None]
     channel_id: str | None
-    user: NotRequired["User"]
+    user: NotRequired[User]
     name: str | None
     avatar: str | None
     token: NotRequired[str]
     application_id: str | None
-    source_guild: NotRequired["Guild"]
-    source_channel: NotRequired["Channel"]
+    source_guild: NotRequired[Guild]
+    source_channel: NotRequired[Channel]
     url: NotRequired[str]
 
 

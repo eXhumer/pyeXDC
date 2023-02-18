@@ -17,7 +17,7 @@ class VoiceState(TypedDict):
     guild_id: NotRequired[str]
     channel_id: str | None
     user_id: str
-    member: NotRequired["GuildMember"]
+    member: NotRequired[GuildMember]
     session_id: str
     deaf: bool
     mute: bool

@@ -18,9 +18,9 @@ class Application(TypedDict):
     bot_require_code_grant: bool
     terms_of_service_url: NotRequired[str]
     privacy_policy_url: NotRequired[str]
-    owner: NotRequired["User"]
+    owner: NotRequired[User]
     verify_key: str
-    team: "Team" | None
+    team: Team | None
     guild_id: NotRequired[str]
     primary_sku_id: NotRequired[str]
     slug: NotRequired[str]
@@ -45,5 +45,5 @@ class ApplicationFlag(IntFlag):
 
 
 class InstallParams(TypedDict):
-    scopes: list["OAuth2Scope"]
+    scopes: list[OAuth2Scope]
     permissions: str

@@ -32,7 +32,7 @@ class ApplicationCommandOption(TypedDict):
     required: NotRequired[bool]
     choices: NotRequired[list[ApplicationCommandOptionChoice]]
     options: NotRequired[list[ApplicationCommandOption]]
-    channel_types: NotRequired[list["ChannelType"]]
+    channel_types: NotRequired[list[ChannelType]]
     min_value: NotRequired[int | float]
     max_value: NotRequired[int | float]
     min_length: NotRequired[int]
