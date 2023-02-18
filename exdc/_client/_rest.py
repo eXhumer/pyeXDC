@@ -19,7 +19,7 @@ except ImportError:
 class REST:
     API_URL = "https://discord.com/api"
     VERSION = 10
-    __LOGGER = getLogger(f"{__module__}.REST")
+    __LOGGER = getLogger("exdc.REST")
 
     def __init__(self, authorization: str | None = None, http_client: Client | None = None,
                  user_agent: str | None = None):
