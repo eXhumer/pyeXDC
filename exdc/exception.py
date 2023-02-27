@@ -23,7 +23,7 @@ class GatewayHBNoAckException(GatewayException):
 class RESTException(Exception):
     def __init__(self, res: Response):
         self.__res = res
-        super().__init__("REST exception occurred!")
+        super().__init__(f"REST exception occurred with status code {self.__res.status_code}!")
 
     @property
     def response(self):
