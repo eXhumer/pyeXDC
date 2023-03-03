@@ -138,6 +138,9 @@ class REST:
 
         payload = {}
 
+        if embeds:
+            payload |= {"embeds": embeds}
+
         if tts:
             payload |= {"tts": tts}
 
@@ -200,6 +203,9 @@ class REST:
         assert content or embeds or components or uploads
 
         payload = {}
+
+        if embeds:
+            payload |= {"embeds": embeds}
 
         if username:
             payload |= {"username": username}
