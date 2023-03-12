@@ -35,18 +35,16 @@ class REST:
             REST.__CLIENT = Client(http2=h2_available)
             REST.__CLIENT.base_url = f"{REST.API_URL}/v{REST.VERSION}/"
             REST.__CLIENT.follow_redirects = True
-            REST.__CLIENT.headers["User-Agent"] = __user_agent__
 
         self.__authorization = authorization
-        self.__user_agent = user_agent
+        self.__user_agent = user_agent or __user_agent__
 
     def _request(self, method: str, url: str, **kwargs):
-        if self.__user_agent:
-            if "headers" in kwargs:
-                kwargs["headers"] |= {"User-Agent": self.__user_agent}
+        if "headers" in kwargs:
+            kwargs["headers"] |= {"User-Agent": self.__user_agent}
 
-            else:
-                kwargs["headers"] = {"User-Agent": self.__user_agent}
+        else:
+            kwargs["headers"] = {"User-Agent": self.__user_agent}
 
         if self.__authorization:
             if "headers" in kwargs:
@@ -199,8 +197,14 @@ class REST:
                              flags: MessageFlag | None = None,
                              attachments: list[Attachment] | None = None,
                              uploads: list[tuple[IO[bytes], str, str | None]] | None = None,
-                             wait: bool | None = None, thread_id: str | None = None):
+                             wait: bool | None = None, thread_id: str | None = None,
+                             user_agent: str | None = None):
         assert content or embeds or components or uploads
+
+        if REST.__CLIENT is None:
+            REST.__CLIENT = Client(http2=h2_available)
+            REST.__CLIENT.base_url = f"{REST.API_URL}/v{REST.VERSION}/"
+            REST.__CLIENT.follow_redirects = True
 
         payload = {}
 
@@ -266,7 +270,8 @@ class REST:
             params = None
 
         res = REST.__CLIENT.post(f"webhooks/{webhook_id}/{webhook_token}", files=files, json=json,
-                                 params=params)
+                                 params=params,
+                                 headers={"User-Agent": user_agent or __user_agent__})
 
         if res.status_code >= 400:
             raise RESTException(res)

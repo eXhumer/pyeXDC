@@ -1,6 +1,6 @@
 from __future__ import annotations
 from enum import IntEnum, IntFlag, StrEnum
-from typing import Literal, NotRequired, TypedDict, TYPE_CHECKING
+from typing import Any, Literal, NotRequired, TypedDict, TYPE_CHECKING
 
 from .channel import Message
 
@@ -33,7 +33,7 @@ class ReceiveEventPayload(TypedDict):
 
 class DispatchPayload(ReceiveEventPayload):
     op: Literal[Operation.DISPATCH]
-    d: None
+    d: Any | None
     s: None
     t: ReceiveEvent
 
